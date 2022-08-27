@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="Create Academy awards table" author="Akhtar">
+        <createSequence cycle="true" incrementBy="1"
+                        sequenceName="ACADEMY_AWARDS_ID_SEQ" startValue="1"/>
+        <createTable tableName="ACADEMY_AWARDS">
+            <column name="ID" type="NUMBER(19)" defaultValueSequenceNext="ACADEMY_AWARDS_ID_SEQ">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="FROM_YEAR" type="VARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CATEGORY" type="VARCHAR2(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NOMINEE" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ADDITIONAL_INFO" type="TEXT"/>
+            <column name="WON" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="Load Academy award data" author="Akhtar">
+        <loadData tableName="ACADEMY_AWARDS" file="static/csv/academy_awards.csv" >
+            <column name="FROM_YEAR" header="YEAR" />
+            <column name="CATEGORY" header="CATEGORY" />
+            <column name="NOMINEE" header="NOMINEE" type="TEXT"/>
+            <column name="ADDITIONAL_INFO" header="ADDITIONAL_INFO" type="TEXT"/>
+            <column name="WON" header="WON" type="BOOLEAN"/>
+        </loadData>
+    </changeSet>
+
+<!--    <changeSet id="Create Ratings table" author="Akhtar">
+        <createSequence cycle="true" incrementBy="1"
+                        sequenceName="MOVIE_RATINGS_ID_SEQ" startValue="1"/>
+        <createTable tableName="MOVIE_RATINGS">
+            <column name="ID" type="NUMBER(19)" defaultValueSequenceNext="MOVIE_RATINGS_ID_SEQ">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="RATING" type="NUMBER(2)" defaultValue="0" />
+            <column name="USER_COUNT" type="NUMBER(10)" defaultValue="0" />
+            <column name="MOVIE_ID" type="VARCHAR2(10)" />
+        </createTable>
+    </changeSet>-->
+    
+    <changeSet id="Create user Ratings table" author="Akhtar">
+        <createSequence cycle="true" incrementBy="1"
+                        sequenceName="USER_RATINGS_ID_SEQ" startValue="1"/>
+        <createTable tableName="USER_RATING">
+            <column name="ID" type="NUMBER(19)" defaultValueSequenceNext="USER_RATINGS_ID_SEQ">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="RATING" type="NUMBER(2)" >
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_ID" type="VARCHAR2(10)" />
+            <column name="MOVIE_ID" type="VARCHAR2(10)" />
+            <column name="COMMENT" type="TEXT" />
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
