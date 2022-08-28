@@ -137,7 +137,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     }
 
     private ResponseEntity<Object> formErrorResponse(String message, String code, HttpStatus statusCode) {
-        Error error = new Error().setCode(code).setMessage(message);
+        Error error = Error.builder().code(code).message(message).build();
         return new ResponseEntity<>(error, statusCode);
     }
 

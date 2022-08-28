@@ -37,19 +37,6 @@
             <column name="WON" header="WON" type="BOOLEAN"/>
         </loadData>
     </changeSet>
-
-<!--    <changeSet id="Create Ratings table" author="Akhtar">
-        <createSequence cycle="true" incrementBy="1"
-                        sequenceName="MOVIE_RATINGS_ID_SEQ" startValue="1"/>
-        <createTable tableName="MOVIE_RATINGS">
-            <column name="ID" type="NUMBER(19)" defaultValueSequenceNext="MOVIE_RATINGS_ID_SEQ">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="RATING" type="NUMBER(2)" defaultValue="0" />
-            <column name="USER_COUNT" type="NUMBER(10)" defaultValue="0" />
-            <column name="MOVIE_ID" type="VARCHAR2(10)" />
-        </createTable>
-    </changeSet>-->
     
     <changeSet id="Create user Ratings table" author="Akhtar">
         <createSequence cycle="true" incrementBy="1"

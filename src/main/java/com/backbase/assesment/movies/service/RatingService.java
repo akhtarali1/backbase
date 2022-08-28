@@ -34,6 +34,10 @@ public class RatingService {
     }
 
     /**
+     * Save user given rating by updating existing rating of user if given previously for same movie
+     * or create new entry with user rating
+     * If user is anonymous then add userId as ANONYMOUS_USER
+     *
      * @param userRating user rating details to be persisted
      * @param movieId    OMDb movie Id
      * @param userId     logged-in user

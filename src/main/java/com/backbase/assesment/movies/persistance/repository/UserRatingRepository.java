@@ -44,5 +44,5 @@ public interface UserRatingRepository extends JpaRepository<UserRating, Long> {
      * @return list of movie rating details matching the count
      */
     @Query("select new com.backbase.assesment.movies.domain.MovieRating(user.movieId, AVG(user.rating), COUNT(user.rating)) from UserRating user GROUP BY user.movieId order by AVG(user.rating) DESC")
-    List<MovieRating> getTopRatedMovies(Pageable pageable);
+    List<MovieRating> getTopMovieRatings(Pageable pageable);
 }

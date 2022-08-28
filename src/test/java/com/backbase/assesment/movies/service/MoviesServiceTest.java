@@ -51,7 +51,7 @@ class MoviesServiceTest {
         when(awardRepository.findByCategoryAndNomineeEqualsIgnoreCase(anyString(), anyString())).thenReturn(awards(true));
         when(ratingRepository.getRatingCountAndAverage(anyString())).thenReturn(rating());
 
-        Movie movie = moviesService.retrieveMoveDetails("Avatar");
+        Movie movie = moviesService.retrieveMovieDetails("Avatar");
         assertEquals("t123", movie.getId());
         assertEquals("2001", movie.getYear());
         assertEquals("$300,000,000", movie.getBoxOfficeValue());
@@ -68,7 +68,7 @@ class MoviesServiceTest {
         when(awardRepository.findByCategoryAndNomineeEqualsIgnoreCase(anyString(), anyString())).thenReturn(awards(false));
         when(ratingRepository.getRatingCountAndAverage(anyString())).thenReturn(rating());
 
-        Movie movie = moviesService.retrieveMoveDetails("Avatar");
+        Movie movie = moviesService.retrieveMovieDetails("Avatar");
         assertEquals("t123", movie.getId());
         assertEquals("2001", movie.getYear());
         assertEquals("$300,000,000", movie.getBoxOfficeValue());
@@ -85,7 +85,7 @@ class MoviesServiceTest {
         when(awardRepository.findByCategoryAndNomineeEqualsIgnoreCase(anyString(), anyString())).thenReturn(Optional.empty());
         when(ratingRepository.getRatingCountAndAverage(anyString())).thenReturn(rating());
 
-        Movie movie = moviesService.retrieveMoveDetails("Avatar");
+        Movie movie = moviesService.retrieveMovieDetails("Avatar");
         assertEquals("t123", movie.getId());
         assertEquals("2001", movie.getYear());
         assertEquals("$300,000,000", movie.getBoxOfficeValue());
@@ -102,7 +102,7 @@ class MoviesServiceTest {
         when(awardRepository.findByCategoryAndNomineeEqualsIgnoreCase(anyString(), anyString())).thenReturn(Optional.empty());
         when(ratingRepository.getRatingCountAndAverage(anyString())).thenReturn(Optional.empty());
 
-        Movie movie = moviesService.retrieveMoveDetails("Avatar");
+        Movie movie = moviesService.retrieveMovieDetails("Avatar");
         assertEquals("t123", movie.getId());
         assertEquals("2001", movie.getYear());
         assertEquals("$300,000,000", movie.getBoxOfficeValue());
@@ -118,7 +118,7 @@ class MoviesServiceTest {
         when(omdbRestClient.retrieveOmdbData(anyString(), anyString())).thenReturn(OMDB.builder().build());
 
         MovieNotFoundException exception = assertThrows(MovieNotFoundException.class,
-            () -> moviesService.retrieveMoveDetails("Avatar"));
+            () -> moviesService.retrieveMovieDetails("Avatar"));
         assertEquals("Avatar", exception.getMovieName());
     }
 
@@ -128,14 +128,14 @@ class MoviesServiceTest {
         when(omdbRestClient.retrieveOmdbData(anyString(), anyString())).thenReturn(null);
 
         MovieNotFoundException exception = assertThrows(MovieNotFoundException.class,
-            () -> moviesService.retrieveMoveDetails("Avatar"));
+            () -> moviesService.retrieveMovieDetails("Avatar"));
         assertEquals("Avatar", exception.getMovieName());
     }
 
     @Test
     @DisplayName("Get Top-10 movies")
     void getTopMovies() {
-        when(ratingRepository.getTopRatedMovies(any())).thenReturn(List.of(rating().get()));
+        when(ratingRepository.getTopMovieRatings(any())).thenReturn(List.of(rating().get()));
         when(omdbRestClient.retrieveOmdbData("i", "t123")).thenReturn(getOmdbResponse());
         List<Movie> movies = moviesService.getTopMovies(10);
         assertFalse(movies.isEmpty());
@@ -153,7 +153,7 @@ class MoviesServiceTest {
     @Test
     @DisplayName("Get Top movies when no response from OMDB")
     void getTopMoviesWithNoResponseFromOMDB() {
-        when(ratingRepository.getTopRatedMovies(any())).thenReturn(List.of(rating().get()));
+        when(ratingRepository.getTopMovieRatings(any())).thenReturn(List.of(rating().get()));
         when(omdbRestClient.retrieveOmdbData("i", "t123")).thenReturn(null);
         List<Movie> movies = moviesService.getTopMovies(10);
         assertTrue(movies.isEmpty());

@@ -2,6 +2,7 @@ package com.backbase.assesment.movies.service.mapper;
 
 import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.UP;
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.util.List;
 
@@ -20,6 +21,8 @@ import com.backbase.assesment.movies.persistance.entity.UserRating;
  */
 @Service
 public class MoviesRatingMapper {
+
+    private static final String ANONYMOUS_USER = "anonymous_user";
 
     /**
      * Map movie model with all details
@@ -54,7 +57,7 @@ public class MoviesRatingMapper {
         return builder
             .rating(userRating.getUserRating())
             .movieId(movieId)
-            .userId(userId)
+            .userId(isNotEmpty(userId) ? userId : ANONYMOUS_USER)
             .comment(userRating.getComments())
             .build();
     }

@@ -16,8 +16,10 @@ import com.backbase.assesment.movies.persistance.entity.AcademyAward;
 public interface AcademyAwardRepository extends JpaRepository<AcademyAward, Long> {
 
     /**
+     * Find Academy award nomination details for category and nominee name
+     *
      * @param category nominated category
-     * @param nominee nominee name
+     * @param nominee  nominee name
      * @return academy award nominee details
      */
     Optional<AcademyAward> findByCategoryAndNomineeEqualsIgnoreCase(String category, String nominee);

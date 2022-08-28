@@ -50,12 +50,13 @@ public class MoviesService {
     }
 
     /**
-     * Get movie detail based oon title
+     * Get movie based on title with Academy awards won or not
+     * (for now only Best Picture Award category is checked)
      *
      * @param title movie title to be searched
      * @return Movie details
      */
-    public Movie retrieveMoveDetails(String title) {
+    public Movie retrieveMovieDetails(String title) {
         OMDB omdbResponse = omdbRestClient.retrieveOmdbData("t", title);
         String movieFullName = ofNullable(omdbResponse)
             .flatMap(omdb -> ofNullable(omdb.getTitle()))
@@ -79,7 +80,7 @@ public class MoviesService {
      * @return list of movies sorted by box office value
      */
     public List<Movie> getTopMovies(int topCount) {
-        List<MovieRating> movieRatings = ratingRepository.getTopRatedMovies(PageRequest.of(0, topCount));
+        List<MovieRating> movieRatings = ratingRepository.getTopMovieRatings(PageRequest.of(0, topCount));
         return movieRatings.stream()
             .map(this::getMovie)
             .filter(Objects::nonNull)
