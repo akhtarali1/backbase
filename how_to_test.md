@@ -4,4 +4,5 @@
 .\mvnw test
 ```
 
-* API-key needs to be used with header **X-API-KEY** as a token for authentication
+* API-key needs to be used with header **X-API-KEY** as a token for authentication\
+Key can be found in [application.properties](src/main/resources/application.properties) under property `backbase.api.key.value` and changed if needed.

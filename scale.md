@@ -1,2 +1,2 @@
-* With response time in milli-seconds, each instance can handle 100+tps expecting 200 Threads each tomcat server have.
+* With response time in milliseconds, each instance can handle 100+tps expecting 200 Threads each tomcat server have.
 * The application needs to scaled horizontally i.e Auto/manually scaling pods/instances/servers.

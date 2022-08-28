@@ -59,7 +59,7 @@ public class RatingsController {
     @PostMapping("/{id}/rating")
     @ResponseStatus(CREATED)
     public Rating postRatings(@PathVariable String id, @RequestBody @Valid Rating rating,
-                              @RequestHeader(required = false, value = "X-user-id") String userId) {
+                              @RequestHeader(required = false, value = "x-user-id") String userId) {
         return ratingService.saveUserRating(rating, id, userId);
     }
 }

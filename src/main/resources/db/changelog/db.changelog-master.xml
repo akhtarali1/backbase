@@ -48,7 +48,7 @@
             <column name="RATING" type="NUMBER(2)" >
                 <constraints nullable="false"/>
             </column>
-            <column name="USER_ID" type="VARCHAR2(10)" />
+            <column name="USER_ID" type="VARCHAR2(20)" />
             <column name="MOVIE_ID" type="VARCHAR2(10)" />
             <column name="COMMENT" type="TEXT" />
         </createTable>

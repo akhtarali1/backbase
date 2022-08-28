@@ -2,11 +2,14 @@ package com.backbase.assesment.movies;
 
 import java.time.Duration;
 
+import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+
+import io.swagger.v3.oas.models.parameters.Parameter;
 
 /**
  * Backbase movie application main class
@@ -37,6 +40,21 @@ public class BackbaseMoviesApplication {
             .setReadTimeout(Duration.ofSeconds(5))
             .setConnectTimeout(Duration.ofSeconds(3))
             .build();
+    }
+
+    /**
+     * Bean to add default header of API key for Swagger-UI
+     *
+     * @return customizable operation
+     */
+    @Bean
+    public OperationCustomizer customize() {
+        return (operation, handlerMethod) -> operation.addParametersItem(
+            new Parameter()
+                .in("header")
+                .required(true)
+                .description("API key")
+                .name("X-API-KEY"));
     }
 
 }

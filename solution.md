@@ -9,4 +9,6 @@
 * The rest resources are defined according to Open-API specifications.
 * The solution is designed and developed to be also a cloud deployable component(Azure App-services) with minimal changes.
 * The performance of the application is also considered by guaranteeing response time at O(n) - response time in milliseconds.
-* Code Quality & coding conventions are followed.
+
+## System-context diagram
+![System-context diagram](diagrams/System Context Diagram.jpg)
