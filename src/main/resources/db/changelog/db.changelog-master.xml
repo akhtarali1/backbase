@@ -53,5 +53,11 @@
             <column name="COMMENT" type="TEXT" />
         </createTable>
     </changeSet>
+    
+    <changeSet id="Create index for movieId column in user_ratings" author="Akhtar">
+        <createIndex indexName="MOVIE_ID_INDEX" tableName="USER_RATING">
+            <column name="MOVIE_ID"/>
+        </createIndex>
+    </changeSet>
 
 </databaseChangeLog>

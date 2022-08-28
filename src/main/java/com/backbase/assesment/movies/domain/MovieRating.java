@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Domain class for inter mapping and DB queries
+ * Domain class for internal mapping and DB queries
  *
  * @author Akhtar
  */
